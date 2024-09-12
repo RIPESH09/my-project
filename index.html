@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login / Sign Up</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"> <!-- Font Awesome -->
+    <script>
+        function toggleForm(showSignUp) {
+            document.getElementById("loginForm").style.display = showSignUp ? "none" : "flex";
+            document.getElementById("signupForm").style.display = showSignUp ? "flex" : "none";
+            document.getElementById("loginForm").classList.toggle("blurred", showSignUp);
+        }
+
+        function togglePasswordVisibility(fieldId, toggleId) {
+            const passwordField = document.getElementById(fieldId);
+            const passwordToggle = document.getElementById(toggleId);
+
+            passwordField.type = passwordField.type === 'password' ? 'text' : 'password';
+
+            // Toggle the eye icon
+            passwordToggle.classList.toggle('fa-eye', passwordField.type === 'password');
+            passwordToggle.classList.toggle('fa-eye-slash', passwordField.type === 'text');
+        }
+    </script>
+</head>
+<body>
+
+<div class="container">
+    <!-- Login Form -->
+    <div id="loginForm" class="form-container">
+        <h2>Login</h2>
+        <form action="/login" method="post">
+            <label for="loginEmail">Email Address</label>
+            <input type="email" id="loginEmail" name="loginEmail" required>
+            
+            <label for="loginPassword">Password</label>
+            <div class="password-container">
+                <input type="password" id="loginPassword" name="loginPassword" required>
+                <i id="loginPasswordToggle" class="fa fa-eye" onclick="togglePasswordVisibility('loginPassword', 'loginPasswordToggle')"></i>
+            </div>
+            
+            <input type="submit" value="Login">
+            <p>Not registered? <a href="javascript:void(0);" onclick="toggleForm(true)">Sign Up</a></p>
+            <p><a href="javascript:void(0);" onclick="alert('Forgot Password functionality is not implemented yet.')">Forgot Password</a></p>
+        </form>
+    </div>
+
+    <!-- Sign Up Form -->
+    <div id="signupForm" class="popup-form" style="display: none;">
+        <div class="popup-content">
+            <h2>Sign Up</h2>
+            <form action="/signup" method="post">
+                <label for="name">Full Name</label>
+                <input type="text" id="name" name="name" required>
+
+                <label for="email">Email Address</label>
+                <input type="email" id="email" name="email" required>
+
+                <label for="password">Password</label>
+                <div class="password-container">
+                    <input type="password" id="password" name="password" required>
+                    <i id="passwordToggle" class="fa fa-eye" onclick="togglePasswordVisibility('password', 'passwordToggle')"></i>
+                </div>
+
+                <label for="confirmPassword">Confirm Password</label>
+                <div class="password-container">
+                    <input type="password" id="confirmPassword" name="confirmPassword" required>
+                    <i id="confirmPasswordToggle" class="fa fa-eye" onclick="togglePasswordVisibility('confirmPassword', 'confirmPasswordToggle')"></i>
+                </div>
+
+                <input type="submit" value="Sign Up">
+            </form>
+            <p><a href="javascript:void(0);" onclick="toggleForm(false)">Back to Login</a></p>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
